@@ -1,0 +1,72 @@
+openapi: 3.0.3
+info:
+  title: Note
+  version: 0.0.1-SNAPSHOT
+tags:
+  - name: Note
+    description: Заметки
+paths:
+  /note/create:
+    post:
+      tags:
+        - CreateNote
+      operationId: CreateNote
+      description: Создание новой заметки
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NoteRequestDTO"
+      responses:
+        '200':
+          description: Note create successfully
+  /note/update/{note_id}:
+    put:
+      tags:
+        - UpdateNote
+      operationId: UpdateNote
+      description: Реадактирование заметки
+      parameters:
+        - name: note_id
+          in: path
+          description: Идентификатор заметки
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NoteRequestDTO"
+      responses:
+        200:
+          description: Note update successfully
+
+components:
+  schemas:
+    NoteRequestDTO:
+      title: NoteRequestDTO
+      type: object
+      description: Модель заметки
+      required:
+        - noteId
+        - title
+        - content
+      properties:
+        noteId:
+          type: integer
+          format: int64
+          example: 1
+          minimum: 1
+          description: Номер заметки
+        title:
+          type: string
+          example: Java internship
+          description: Заголовок заметки
+        content:
+          type: string
+          example: make a test task
+          description: Текст заметки
