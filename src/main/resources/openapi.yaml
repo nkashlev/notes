@@ -17,7 +17,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/NoteRequestDTO"
+              $ref: "#/components/schemas/NoteDTO"
       responses:
         '200':
           description: Note create successfully
@@ -40,17 +40,71 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/NoteRequestDTO"
+              $ref: "#/components/schemas/NoteDTO"
       responses:
         200:
           description: Note update successfully
+  /note/delete/{note_id}:
+    delete:
+      tags:
+        - DeleteNote
+      operationId: DeleteNote
+      description: Удаление заметки
+      parameters:
+        - name: note_id
+          in: path
+          description: Идентификатор заметки
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: Note delete successfully
+  /note/get/{note_id}:
+    get:
+      tags:
+        - GetNote
+      operationId: GetNote
+      description: Получение заметки
+      parameters:
+        - name: note_id
+          in: path
+          description: Идентификатор заметки
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: Note get successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NoteDTO"
+  /note/get/list/:
+    get:
+      tags:
+        - GetNotes
+      operationId: GetNotes
+      description: Получение заметок
+
+      responses:
+        200:
+          description: Notes get successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NoteDTO"
 
 components:
   schemas:
-    NoteRequestDTO:
-      title: NoteRequestDTO
+    NoteDTO:
+      title: NoteDTO
       type: object
-      description: Модель заметки
+      description: Модель заметки DTO
       required:
         - noteId
         - title
