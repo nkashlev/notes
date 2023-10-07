@@ -9,6 +9,7 @@ import ru.nkashlev.notes.exceptions.ResourceNotFoundException;
 import ru.nkashlev.notes.model.NoteDTO;
 import ru.nkashlev.notes.repositories.NoteRepository;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,19 @@ public class NoteService {
 
     private final Logger LOGGER = LoggerFactory.getLogger(NoteService.class);
 
+
+    @PostConstruct
+    public void initialize() {
+        if (noteRepository.count() == 0) {
+            Note note = new Note();
+            note.setNoteId(1L);
+            note.setTitle("title");
+            note.setContent("text note");
+            noteRepository.save(note);
+            LOGGER.info("New note created with title: {}", note.getTitle());
+        }
+    }
+
     public void createNewNote(NoteDTO request) {
         saveNote(request);
         LOGGER.info("New note created with title: {}", request.getTitle());
@@ -27,7 +41,6 @@ public class NoteService {
 
     public void updateNote(Long noteId, NoteDTO request) throws ResourceNotFoundException {
         Note note = findNoteById(noteId);
-        note.setNoteId(request.getNoteId());
         note.setTitle(request.getTitle());
         note.setContent(request.getContent());
         noteRepository.save(note);
@@ -75,7 +88,7 @@ public class NoteService {
         LOGGER.info("Started to find note with id: {}", id);
         Note note = noteRepository.findById(id).orElse(null);
         if (note == null) {
-            throw new ResourceNotFoundException("Cannot find note with id: {}"+ id);
+            throw new ResourceNotFoundException("Cannot find note with id: " + id);
         }
         LOGGER.info("Found note with id: {}", id);
         return note;

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Заметка</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"  th:href="@{/css/style.css}" />
+</head>
+<body>
+<p th:text="${note.getTitle()}">VALUE</p>
+<p th:text="${note.getContent()}">VALUE</p>
+
+<a th:href="@{/notes/{id}/edit(id=${note.getNoteId()})}">Edit</a>
+<br/>
+<a href="/notes/new">Create</a>
+<br/>
+<form th:method="DELETE" th:action="@{/notes/{id}(id=${note.getNoteId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+
+</body>
+</html>
+

@@ -1,0 +1,17 @@
+css,
+.note {
+    width: 200px;
+    height: 200px;
+    background-color: #d7bf5f;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.note input[type="text"], .note textarea {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.note button {
+    width: 100%;
+}

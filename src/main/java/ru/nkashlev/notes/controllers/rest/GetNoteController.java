@@ -1,4 +1,4 @@
-package ru.nkashlev.notes.controllers;
+package ru.nkashlev.notes.controllers.rest;
 
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;

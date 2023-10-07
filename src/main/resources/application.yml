@@ -13,3 +13,15 @@ spring:
     liquibase:
         change-log: classpath:db/changelog/db.changelog-master.xml
 
+    thymeleaf:
+        prefix: classpath:/templates/
+        suffix: .html
+
+    mvc:
+        hiddenmethod:
+            filter:
+                enabled: true
+
+
+
+
