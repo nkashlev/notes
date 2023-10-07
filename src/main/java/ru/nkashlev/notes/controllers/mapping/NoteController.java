@@ -29,6 +29,12 @@ public class NoteController {
         return "/note";
     }
 
+    @GetMapping("/show")
+    public String getAll(Model model) {
+        model.addAttribute("notes", noteService.getListNotes());
+        return "/show";
+    }
+
     @GetMapping("/new")
     public String newNote(@ModelAttribute("note") NoteDTO note) {
         return "/new";
