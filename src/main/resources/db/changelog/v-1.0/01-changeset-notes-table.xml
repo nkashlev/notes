@@ -16,7 +16,11 @@
             <column name="content" type="VARCHAR(200)">
                 <constraints nullable="true"/>
             </column>
-        </createTable>
-    </changeSet>
 
-</databaseChangeLog>
+            <column name="style_text" type="JSONB">
+            <constraints nullable="true"/>
+            </column>
+
+    </createTable>
+</changeSet>
+        </databaseChangeLog>

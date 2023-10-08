@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Update note</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" th:href="@{/css/style.css}"/>
 </head>
 <body>
-
-<form th:method="PUT" th:action="@{/notes/{id}(id=${note.getNoteId()})}" th:object="${note}">
-    <label for="title">Enter title: </label>
-    <input type="text" th:field="*{title}" id="title"/>
-    <br/>
-    <label for="content">Enter content: </label>
-    <input type="text" th:field="*{content}" id="content"/>
-    <br/>
-    <br/>
-    <input type="submit" value="Update!"/>
-</form>
+<div class="note">
+    <form th:method="PUT" th:action="@{/notes/{id}(id=${note.getNoteId()})}" th:object="${note}">
+        <label for="title">Enter title: </label>
+        <input type="text" th:field="*{title}" id="title"/>
+        <br/>
+        <label for="content">Enter content: </label>
+        <input type="text" th:field="*{content}" id="content"/>
+        <br/>
+        <br/>
+        <input type="submit" value="Update!"/>
+    </form>
+</div>
 
 </body>
 </html>
+

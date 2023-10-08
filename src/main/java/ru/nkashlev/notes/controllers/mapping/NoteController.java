@@ -29,10 +29,10 @@ public class NoteController {
         return "/note";
     }
 
-    @GetMapping("/show")
+    @GetMapping("/list")
     public String getAll(Model model) {
         model.addAttribute("notes", noteService.getListNotes());
-        return "/show";
+        return "list";
     }
 
     @GetMapping("/new")
@@ -42,8 +42,8 @@ public class NoteController {
 
     @PostMapping()
     public String create(@ModelAttribute("note") NoteDTO note) {
-        noteService.createNewNote(note);
-        return "redirect:/notes";
+        Long id = noteService.createNewNote(note);
+        return "redirect:/notes/" + id;
     }
 
     @SneakyThrows
@@ -57,13 +57,13 @@ public class NoteController {
     @PutMapping("/{id}")
     public String update(@ModelAttribute("note") NoteDTO note, @PathVariable("id")  Long id) {
         noteService.updateNote(id, note);
-        return "redirect:/notes";
+        return "redirect:/notes/" + id;
     }
 
     @SneakyThrows
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") Long id) {
         noteService.deleteNoteById(id);
-        return "redirect:/notes";
+        return "redirect:/notes/list";
     }
 }

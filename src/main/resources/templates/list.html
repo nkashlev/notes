@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Все заметки</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="note">
+    <div th:each="note : ${notes}">
+        <a th:href="@{/notes/{id}(id=${note.getNoteId()})}" th:text="${note.getTitle()}">note</a>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,17 +1,17 @@
-css,
 .note {
+    border: 1px solid #1a1717;
     width: 200px;
     height: 200px;
-    background-color: #d7bf5f;
     padding: 10px;
-    border-radius: 5px;
+    background-color: #eee4b7;
 }
 
-.note input[type="text"], .note textarea {
-    width: 100%;
-    margin-bottom: 10px;
+.note h1 {
+    font-size: 22px;
+    font-weight: bold;
 }
 
-.note button {
-    width: 100%;
+.note p {
+    font-size: 14px;
 }
+

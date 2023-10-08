@@ -109,6 +109,7 @@ components:
         - noteId
         - title
         - content
+        - styleText
       properties:
         noteId:
           type: integer
@@ -124,3 +125,34 @@ components:
           type: string
           example: make a test task
           description: Текст заметки
+        styleText:
+          $ref: '#/components/schemas/StyleText'
+
+    StyleText:
+      title: StyleText
+      type: object
+      description: Модель стиля текста
+      required:
+        - italics
+        - bold
+        - font
+        - textSize
+      properties:
+        italics:
+          type: boolean
+          example: false
+          description: флаг курсива
+        bold:
+          type: boolean
+          example: false
+          description: флаг выделения жирным
+        font:
+          type: string
+          example: Arial
+          description: шрифт текста
+        textSize:
+          type: integer
+          format: int32
+          example: 12
+          description: Размер шрифта
+

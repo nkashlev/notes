@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import ru.nkashlev.notes.entity.Note;
 import ru.nkashlev.notes.exceptions.ResourceNotFoundException;
 import ru.nkashlev.notes.model.NoteDTO;
+import ru.nkashlev.notes.model.StyleText;
 import ru.nkashlev.notes.repositories.NoteRepository;
 
 import javax.annotation.PostConstruct;
@@ -26,24 +27,27 @@ public class NoteService {
     public void initialize() {
         if (noteRepository.count() == 0) {
             Note note = new Note();
-            note.setNoteId(1L);
-            note.setTitle("title");
-            note.setContent("text note");
+            note.setTitle("Title");
+            note.setContent("Content");
+            StyleText styleText = new StyleText();
+            styleText.setItalics(true);
+            styleText.setBold(false);
+            styleText.setFont("Arial");
+            styleText.setTextSize(12);
+            note.setStyleText(styleText);
             noteRepository.save(note);
             LOGGER.info("New note created with title: {}", note.getTitle());
         }
     }
 
-    public void createNewNote(NoteDTO request) {
-        saveNote(request);
+    public Long createNewNote(NoteDTO request) {
+        Note note = saveNote(request);
         LOGGER.info("New note created with title: {}", request.getTitle());
+        return note.getNoteId();
     }
 
-    public void updateNote(Long noteId, NoteDTO request) throws ResourceNotFoundException {
-        Note note = findNoteById(noteId);
-        note.setTitle(request.getTitle());
-        note.setContent(request.getContent());
-        noteRepository.save(note);
+    public void updateNote(Long noteId, NoteDTO request) {
+        saveNote(request);
         LOGGER.info("Note updated with id: {}", noteId);
     }
 
@@ -75,13 +79,19 @@ public class NoteService {
         return notes;
     }
 
-    private void saveNote(NoteDTO request) {
+    private Note saveNote(NoteDTO request) {
         Note note = new Note();
-        note.setNoteId(request.getNoteId());
         note.setTitle(request.getTitle());
         note.setContent(request.getContent());
+        StyleText styleText = new StyleText();
+        styleText.setItalics(request.getStyleText().isItalics());
+        styleText.setBold(request.getStyleText().isBold());
+        styleText.setFont(request.getStyleText().getFont());
+        styleText.setTextSize(request.getStyleText().getTextSize());
+        note.setStyleText(styleText);
         noteRepository.save(note);
         LOGGER.info("New note saved with id: {}", request.getNoteId());
+        return note;
     }
 
     private Note findNoteById(Long id) throws ResourceNotFoundException {

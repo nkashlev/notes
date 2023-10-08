@@ -2,7 +2,9 @@ package ru.nkashlev.notes.entity;
 
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.Data;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
+import ru.nkashlev.notes.model.StyleText;
 
 import javax.persistence.*;
 @Data
@@ -21,4 +23,8 @@ public class Note {
 
     @Column(name = "content")
     private String content;
+
+    @Type(type = "jsonb")
+    @Column(name = "style_text")
+    private StyleText styleText;
 }

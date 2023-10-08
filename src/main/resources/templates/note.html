@@ -3,20 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Заметка</title>
-    <link rel="stylesheet" type="text/css" href="/css/style.css"  th:href="@{/css/style.css}" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" th:href="@{/css/style.css}"/>
 </head>
 <body>
-<p th:text="${note.getTitle()}">VALUE</p>
-<p th:text="${note.getContent()}">VALUE</p>
-
-<a th:href="@{/notes/{id}/edit(id=${note.getNoteId()})}">Edit</a>
-<br/>
-<a href="/notes/new">Create</a>
-<br/>
-<form th:method="DELETE" th:action="@{/notes/{id}(id=${note.getNoteId()})}">
-    <input type="submit" value="Delete"/>
-</form>
+<div class="note">
+    <p th:text="${note.getTitle()}">VALUE</p>
+    <p th:text="${note.getContent()}">VALUE</p>
+<!--    <p th:text="${note.getStyleText().getFont()}">VALUE</p>-->
+<!--    <p th:text="${note.getStyleText().isItalics()}">VALUE</p>-->
+<!--    <p th:text="${note.getStyleText().isBold()}">VALUE</p>-->
+<!--    <p th:text="${note.getStyleText().getTextSize()}">VALUE</p>-->
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <a th:href="@{/notes/{id}/edit(id=${note.getNoteId()})}">Edit</a>
+    <a th:href="@{/notes/new}">Add</a>
+    <a th:href="@{/notes/list}">List</a>
+    <form th:method="DELETE" th:action="@{/notes/{id}(id=${note.getNoteId()})}">
+        <input type="submit" value="Delete"/>
+    </form>
+</div>
 
 </body>
 </html>
-
