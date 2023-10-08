@@ -83,12 +83,6 @@ public class NoteService {
         Note note = new Note();
         note.setTitle(request.getTitle());
         note.setContent(request.getContent());
-        StyleText styleText = new StyleText();
-        styleText.setItalics(request.getStyleText().isItalics());
-        styleText.setBold(request.getStyleText().isBold());
-        styleText.setFont(request.getStyleText().getFont());
-        styleText.setTextSize(request.getStyleText().getTextSize());
-        note.setStyleText(styleText);
         noteRepository.save(note);
         LOGGER.info("New note saved with id: {}", request.getNoteId());
         return note;
